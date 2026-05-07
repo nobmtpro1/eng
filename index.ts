@@ -27,13 +27,10 @@ app.get("/", async (req: Request, res: Response) => {
     myHeaders.append("X-Title", randomItem.a);
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-    const urlencoded = new URLSearchParams();
-    urlencoded.append(`${randomItem.b} - ${randomItem.c}`, "");
-
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: urlencoded,
+      body: `${randomItem.b} - ${randomItem.c}`,
       redirect: "follow",
     };
 

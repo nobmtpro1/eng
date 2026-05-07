@@ -25,7 +25,7 @@ app.get("/", async (req: Request, res: Response) => {
     const randomItem = data[Math.floor(Math.random() * data.length)];
     const myHeaders = new Headers();
     myHeaders.append("X-Title", randomItem.a);
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "application/json");
 
     const requestOptions = {
       method: "POST",

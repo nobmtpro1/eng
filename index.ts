@@ -37,7 +37,7 @@ app.get("/", async (req: Request, res: Response) => {
       redirect: "follow",
     };
 
-    fetch("ntfy.sh/Vocabulary", requestOptions)
+    const response = await fetch("ntfy.sh/Vocabulary", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));

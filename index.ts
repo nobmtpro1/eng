@@ -22,24 +22,26 @@ app.get("/", async (req: Request, res: Response) => {
     //     }),
     //   },
     // );
-    const randomItem = data[Math.floor(Math.random() * data.length)];
-    const myHeaders = new Headers();
-    myHeaders.append("X-Title", randomItem.a);
-    myHeaders.append("Content-Type", "application/json");
+    const randomItems = [...data].sort(() => Math.random() - 0.5).slice(0, 3);
+    for (const randomItem of randomItems) {
+      const myHeaders = new Headers();
+      myHeaders.append("X-Title", randomItem.a);
+      myHeaders.append("Content-Type", "application/json");
 
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: `${randomItem.b} - ${randomItem.c}`,
-      redirect: "follow",
-    };
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: `${randomItem.b} - ${randomItem.c}`,
+        redirect: "follow",
+      };
 
-    const response = await fetch("https://ntfy.sh/Vocabulary", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+      const response = await fetch("https://ntfy.sh/Vocabulary", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
 
-    console.log("Webhook called:", response.status);
+      console.log("Webhook called:", response.status);
+    }
   } catch (error) {
     console.error("Webhook error:", error);
   }
